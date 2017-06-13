@@ -239,6 +239,7 @@
             this.Controls.Add(this.Tank);
             this.DoubleBuffered = true;
             this.Name = "SpaceInvaders";
+            this.Text = "x";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyIsDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyIsUp);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).EndInit();

@@ -94,11 +94,37 @@ namespace SpaceInvaders
 
                     if (((PictureBox)y).Top < this.Height - 490)
                     {
-                        this.Controls.Remove(y); 
+                        this.Controls.Remove(y);
                     }
                 }
             }
 
+            foreach (Control i in this.Controls)
+            {
+                foreach (Control j in this.Controls)
+                {
+                    if (i is PictureBox && i.Tag == "invader")
+                    {
+                        if (j is PictureBox && j.Tag == "bullet")
+                        {
+                            if (i.Bounds.IntersectsWith(j.Bounds))
+                            {
+                                Score++;
+                                this.Controls.Remove(i);
+                                this.Controls.Remove(j);
+                            }
+                        }
+                    }
+                }
+            }
+
+            label1.Text = "Score : " + Score;
+
+            if (Score > totalEnemies - 1)
+            {
+                GameOver();
+                MessageBox.Show("You Win");
+            }
         }
         private void MakeBullet()
         {
