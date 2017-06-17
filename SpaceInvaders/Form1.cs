@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SpaceInvaders
@@ -17,7 +11,7 @@ namespace SpaceInvaders
         int speed = 5;
         int Score = 0;
         bool isPressed;
-        int totalEnemies = 12;
+        int totalEnemies =32;
         int playerSpeed = 6;
 
 
@@ -77,12 +71,14 @@ namespace SpaceInvaders
                         GameOver();
                     }
                      ((PictureBox)x).Left += speed;
+                   
 
-                    if (((PictureBox)x).Left > 720)
+                    if (((PictureBox)x).Left>= 720)
                     {
                         ((PictureBox)x).Top += ((PictureBox)x).Height + 10;
 
-                        ((PictureBox)x).Left = -50;
+                        ((PictureBox)x).Left= -50;
+                        
                     }
                 }
             }
@@ -149,5 +145,7 @@ namespace SpaceInvaders
             timer2.Stop();
             label1.Text += " Game Over";
         }
+
+
     }
 }
