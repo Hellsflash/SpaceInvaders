@@ -8,14 +8,14 @@ namespace SpaceInvaders
     {
         bool goLeft;
         bool goRight;
-        int speed = 1;
+        int speed = 2;
         int Score = 0;
         bool isPressed;
-        int totalEnemies = 32;
+        int totalEnemies = 24;
         int playerSpeed = 6;
-        
-       
-       
+        public Random r = new Random();
+
+
 
         public SpaceInvaders()
         {
@@ -35,7 +35,7 @@ namespace SpaceInvaders
             {
                 isPressed = true;
                 MakeBullet();
-                
+
             }
         }
 
@@ -57,6 +57,7 @@ namespace SpaceInvaders
 
         private void timer2_Tick(object sender, EventArgs e)
         {
+
             if (goLeft)
             {
                 Tank.Left -= playerSpeed;
@@ -73,28 +74,34 @@ namespace SpaceInvaders
                     if (((PictureBox)x).Bounds.IntersectsWith(Tank.Bounds))
                     {
                         GameOver();
+                        MessageBox.Show("Game Over");
                     }
 
                      ((PictureBox)x).Left += speed;
-                    
+
 
                     if (((PictureBox)x).Right == ClientRectangle.Width)
                     {
-                        speed = -1;
+
+                        speed = -2;
                         (((PictureBox)x).Left) += speed;
 
-
+                    }
+                    if (((PictureBox)x).Left == (ClientRectangle.Width/2)-20)
+                    {
+                        ((PictureBox)x).Top += ((PictureBox)x).Height /2;
                     }
 
                     if (((PictureBox)x).Left <= 0)
                     {
-                        speed = 1;
+                        speed = 2;
                         ((PictureBox)x).Left += speed;
 
                     }
-                  
+                    
+
                 }
-                
+
             }
             foreach (Control y in this.Controls)
             {
@@ -135,7 +142,7 @@ namespace SpaceInvaders
                 GameOver();
                 MessageBox.Show("You Win");
             }
-           
+
         }
         private void MakeBullet()
         {
@@ -154,9 +161,9 @@ namespace SpaceInvaders
             this.Controls.Add(bullet);
 
             bullet.BringToFront();
-            
+
         }
-       
+
         private void GameOver()
         {
             timer2.Stop();
