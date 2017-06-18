@@ -8,12 +8,14 @@ namespace SpaceInvaders
     {
         bool goLeft;
         bool goRight;
-        int speed = 5;
+        int speed = 1;
         int Score = 0;
         bool isPressed;
-        int totalEnemies =32;
+        int totalEnemies = 32;
         int playerSpeed = 6;
-
+        
+       
+       
 
         public SpaceInvaders()
         {
@@ -33,6 +35,7 @@ namespace SpaceInvaders
             {
                 isPressed = true;
                 MakeBullet();
+                
             }
         }
 
@@ -66,21 +69,32 @@ namespace SpaceInvaders
             {
                 if (x is PictureBox && x.Tag == "invader")
                 {
+
                     if (((PictureBox)x).Bounds.IntersectsWith(Tank.Bounds))
                     {
                         GameOver();
                     }
+
                      ((PictureBox)x).Left += speed;
-                   
+                    
 
-                    if (((PictureBox)x).Left>= 720)
+                    if (((PictureBox)x).Right == ClientRectangle.Width)
                     {
-                        ((PictureBox)x).Top += ((PictureBox)x).Height + 10;
+                        speed = -1;
+                        (((PictureBox)x).Left) += speed;
 
-                        ((PictureBox)x).Left= -50;
-                        
+
                     }
+
+                    if (((PictureBox)x).Left <= 0)
+                    {
+                        speed = 1;
+                        ((PictureBox)x).Left += speed;
+
+                    }
+                  
                 }
+                
             }
             foreach (Control y in this.Controls)
             {
@@ -121,6 +135,7 @@ namespace SpaceInvaders
                 GameOver();
                 MessageBox.Show("You Win");
             }
+           
         }
         private void MakeBullet()
         {
@@ -139,7 +154,9 @@ namespace SpaceInvaders
             this.Controls.Add(bullet);
 
             bullet.BringToFront();
+            
         }
+       
         private void GameOver()
         {
             timer2.Stop();
